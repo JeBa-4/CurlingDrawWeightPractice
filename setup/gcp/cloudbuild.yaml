@@ -1,0 +1,18 @@
+steps:
+# Run tests
+- name: 'node:18'
+  entrypoint: 'npm'
+  args: ['install']
+
+- name: 'node:18'
+  entrypoint: 'npm'
+  args: ['test']
+
+# Build the Docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io//curling-draw-weight-practice:', '.']
+
+# Push the image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io//curling-draw-weight-practice:']
+
