@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curling-draw-weight-practice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: curling-draw-weight-practice
+  template:
+    metadata:
+      labels:
+        app: curling-draw-weight-practice
+    spec:
+      containers:
+      - name: curling-draw-weight-practice
+        image: gcr.io/YOUR_GCP_PROJECT_ID/curling-draw-weight-practice:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: curling-draw-weight-practice-service
+spec:
+  selector:
+    app: curling-draw-weight-practice
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: LoadBalancer
